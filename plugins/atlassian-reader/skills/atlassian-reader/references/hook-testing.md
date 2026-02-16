@@ -33,6 +33,9 @@ Test that commands wrapped in execution indirection are denied:
 - `eval` wrapping a curl to Atlassian
 - `bash -c` wrapping a curl to Atlassian
 - Pipe to `bash`/`sh`/`zsh` with Atlassian URL in the piped content
+- Pipe to bare shell name: `| bash` (no path prefix)
+- Pipe to non-standard path: `| /usr/local/bin/bash`
+- Pipe to full-path env: `| /usr/bin/env bash`
 
 ### Gate 2 — Non-curl HTTP clients (must be BLOCKED)
 
@@ -50,6 +53,8 @@ Test all method flag variants:
 - `-XPOST`, `-XDELETE` (no space — curl accepts this)
 - `--request=PUT`, `--request=PATCH` (equals sign)
 - Case variations: `-X post`, `-x Post`
+- Shell-quoted method: `-X"POST"` (double-quoted, no space after -X)
+- Shell-quoted method: `-X'DELETE'` (single-quoted, no space after -X)
 
 ### Gate 4 — `--json` flag (must be BLOCKED)
 
@@ -76,6 +81,7 @@ Test flags the skill never needs:
 - `-T`/`--upload-file` (PUT upload)
 - `-o`/`--output`/`-O` (write to file)
 - `-K`/`--config` (load options from file — bypasses all regex checks)
+- `-:`/`--next` (transfer group separator — resets per-transfer options like -G)
 
 ### Gate 7 — Variable expansion in method position (must be BLOCKED)
 

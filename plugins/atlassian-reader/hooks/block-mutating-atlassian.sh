@@ -51,7 +51,7 @@ if echo "$command" | grep -qEi '(bash|sh|zsh|dash)[[:space:]]+-c[[:space:]]'; th
   deny "Subshell execution detected targeting Atlassian API. Only direct curl invocations are permitted."
 fi
 
-if echo "$command" | grep -qEi '\|[[:space:]]*((/usr)?/bin/(bash|sh|zsh|dash)|env[[:space:]]+(bash|sh|zsh|dash))(\b|[[:space:]]|$)'; then
+if echo "$command" | grep -qEi '\|[[:space:]]*([^[:space:]]*/)?((env[[:space:]]+)?(bash|sh|zsh|dash))(\b|[[:space:]]|$)'; then
   deny "Pipe to shell detected targeting Atlassian API. Only direct curl invocations are permitted."
 fi
 
@@ -76,11 +76,11 @@ done <<< "$(echo "$command" | awk '{gsub(/;+|&&|\|\|/,"\n"); print}')"
 # (POST, PO""ST, $METHOD, or unknown values) is denied.
 # Also deny multiple method flags — curl uses the last one, so "-X GET -X POST"
 # would pass a naive check but actually sends POST.
-if echo "$command" | grep -qEi '(-X[[:space:]]*[[:alpha:]]|-X[[:space:]]|--request([[:space:]]|=))'; then
+if echo "$command" | grep -qEi '(-X[[:space:]]*[^[:space:]]|-X[[:space:]]|--request([[:space:]]|=))'; then
   if ! echo "$command" | grep -qE '(-X[[:space:]]*|--request[[:space:]]*=?[[:space:]]*)GET([[:space:]]|$)'; then
     deny "Non-GET HTTP method detected targeting Atlassian API. The Atlassian reader skill is strictly read-only. Only GET requests are permitted."
   fi
-  method_count=$(echo "$command" | grep -oEi '(-X[[:space:]]*[[:alpha:]]|-X[[:space:]]|--request([[:space:]]|=))' | wc -l | tr -d ' ')
+  method_count=$(echo "$command" | grep -oEi '(-X[[:space:]]*[^[:space:]]|-X[[:space:]]|--request([[:space:]]|=))' | wc -l | tr -d ' ')
   if [ "$method_count" -gt 1 ]; then
     deny "Multiple HTTP method flags detected targeting Atlassian API. Only a single -X GET is permitted to prevent method shadowing."
   fi
@@ -110,6 +110,7 @@ BLOCKED_FLAGS=(
   '-o.|--output[[:space:]=]'                           # write response to file
   '-O([[:space:]]|$)'                                  # write response to file (remote name)
   '-K.|--config[[:space:]=]'                           # load flags from file (bypasses all checks)
+  '-:([[:space:]]|$)|--next([[:space:]]|$)'            # transfer group separator (resets -G)
 )
 
 BLOCKED_REASONS=(
@@ -118,6 +119,7 @@ BLOCKED_REASONS=(
   "Output-to-file flag (-o/--output)"
   "Output-to-file flag (-O)"
   "Config-from-file flag (-K/--config). This loads curl options from a file, bypassing safety checks"
+  "Transfer group separator (-:/--next). Resets per-transfer options like -G, which could enable POST in subsequent groups"
 )
 
 for i in "${!BLOCKED_FLAGS[@]}"; do
