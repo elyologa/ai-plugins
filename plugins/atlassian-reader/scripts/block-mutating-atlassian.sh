@@ -36,6 +36,15 @@ command=$(printf '%s' "$command" | sed 's/\\$//' | tr '\n' ' ')
 # DNS is case-insensitive, so ATLASSIAN.COM reaches the same servers).
 shopt -s nocasematch
 if [[ ! "$command" =~ atlassian\.(com|net) ]]; then
+  # --- Gate 8: Block shell expansion constructing Atlassian domains ---
+  # If the literal domain check above didn't match, but the word "atlassian"
+  # appears alongside shell expansion metacharacters, the URL may be
+  # dynamically constructed to evade the domain check.
+  if echo "$command" | grep -qi 'atlassian'; then
+    if echo "$command" | grep -qE '\$\(|`'; then
+      deny "Shell expansion detected near 'atlassian' keyword. Dynamic URL construction targeting Atlassian is not permitted."
+    fi
+  fi
   exit 0
 fi
 shopt -u nocasematch
@@ -133,5 +142,18 @@ done
 if echo "$command" | grep -qE '(-X|--request)[[:space:]]*=?[[:space:]]*(\$\{?\w|\$\(|`)'; then
   deny "Variable or command expansion in HTTP method position detected targeting Atlassian API. The method must be a literal value (GET) for safety verification."
 fi
+
+# --- Gate 9: Per-segment data flag + -G validation ---
+# Gate 5 checks globally, which allows a cross-segment bypass where -G in one
+# segment satisfies the check for data flags in another. This gate runs the
+# same check per-segment to close that gap.
+while IFS= read -r segment; do
+  [[ -z "$segment" ]] && continue
+  if echo "$segment" | grep -qEi '(^|[[:space:]])(-d.|-d$|--data([[:space:]=]|$)|--data-raw([[:space:]=]|$)|--data-binary([[:space:]=]|$)|--data-urlencode([[:space:]=]|$))'; then
+    if ! echo "$segment" | grep -qE '(^|[[:space:]])-G([[:space:]]|$)'; then
+      deny "Data payload flag without -G in a command segment targeting Atlassian API. Each curl invocation must include its own -G flag when using data parameters."
+    fi
+  fi
+done <<< "$(echo "$command" | awk '{gsub(/;+|&&|\|\|/,"\n"); print}')"
 
 exit 0

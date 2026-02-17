@@ -1,13 +1,13 @@
 # Hook Testing Reference
 
-How to validate the read-only safety hook (`hooks/block-mutating-atlassian.sh`) after any modification.
+How to validate the read-only safety hook (`scripts/block-mutating-atlassian.sh`) after any modification.
 
 ## Test Harness
 
 The hook reads JSON from stdin and writes JSON to stdout. Pipe a fake `PreToolUse` payload into the script and inspect the result:
 
 ```bash
-bash hooks/block-mutating-atlassian.sh <<< '{"tool_input":{"command":"<CURL_COMMAND_HERE>"}}'
+bash scripts/block-mutating-atlassian.sh <<< '{"tool_input":{"command":"<CURL_COMMAND_HERE>"}}'
 ```
 
 - **No output** = command was allowed (safe).
@@ -91,6 +91,30 @@ Test shell variable patterns in the `-X` argument:
 - `-X $METHOD`
 - `-X ${METHOD}`
 - `-X $(echo POST)`
+
+### Gate 8 — Shell expansion constructing Atlassian domains (must be BLOCKED)
+
+Test dynamic URL construction that evades the literal domain check:
+
+- `$(printf atlassian)` in the URL domain: `curl -X POST -d evil https://api.$(printf atlassian).com/rest/api/3/issue`
+- Backtick expansion in the URL domain: ``curl -X POST -d evil https://api.`echo atlassian`.com/rest/api/3/issue``
+
+Also verify the **safe cases**:
+
+- Literal `atlassian.com` domain with `$(...)` in auth header only (e.g. `$(printf ... | base64)`) must be ALLOWED — the literal domain matches first, so Gate 8 never runs
+- Commands with no `atlassian` keyword at all must be ALLOWED
+
+### Gate 9 — Per-segment data flag + `-G` validation (must be BLOCKED)
+
+Test cross-segment bypass where `-G` in one segment satisfies Gate 5 globally but a different segment has data flags without its own `-G`:
+
+- `curl -G --data-urlencode "jql=test" https://api.atlassian.com/safe ; curl --data-raw "evil" https://api.atlassian.com/issue`
+- Same pattern with `&&` instead of `;`
+
+Also verify the **safe cases**:
+
+- Single segment with `-G` and `--data-urlencode` must be ALLOWED
+- Multiple segments where each has its own `-G` must be ALLOWED
 
 ## Interpreting Results
 

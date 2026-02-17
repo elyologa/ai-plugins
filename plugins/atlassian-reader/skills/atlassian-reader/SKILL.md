@@ -1,6 +1,13 @@
 ---
 name: atlassian-reader
 description: Reads Jira issues, epics, stories, sprints, boards, and Confluence pages from Atlassian Cloud into context via READ-ONLY scoped API tokens and curl commands. Use when the user mentions a Jira ticket (e.g. PROJ-123), references a Confluence page or URL, asks about sprint status, needs epic child stories, or wants to review linked documents for a Jira issue.
+hooks:
+  PreToolUse:
+    - matcher: "Bash"
+      hooks:
+        - type: command
+          command: "../../scripts/block-mutating-atlassian.sh"
+          timeout: 5
 ---
 
 # Atlassian Reader
@@ -255,7 +262,7 @@ Replace `{{SPRINT_ID}}` with the sprint ID from the previous call.
 
 ## 11. Hook Testing
 
-A read-only safety hook (`hooks/block-mutating-atlassian.sh`) blocks all mutating curl operations targeting Atlassian APIs. After modifying the hook or its gates, validate it by reading `references/hook-testing.md` for the full test harness and category list. Generate test payloads dynamically at runtime — do not store them as committed scripts.
+A read-only safety hook (`scripts/block-mutating-atlassian.sh`) blocks all mutating curl operations targeting Atlassian APIs. After modifying the hook or its gates, validate it by reading `references/hook-testing.md` for the full test harness and category list. Generate test payloads dynamically at runtime — do not store them as committed scripts.
 
 ## 12. Error Handling
 
