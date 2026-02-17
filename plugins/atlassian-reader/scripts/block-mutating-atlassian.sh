@@ -41,7 +41,7 @@ if [[ ! "$command" =~ atlassian\.(com|net) ]]; then
   # appears alongside shell expansion metacharacters, the URL may be
   # dynamically constructed to evade the domain check.
   if echo "$command" | grep -qi 'atlassian'; then
-    if echo "$command" | grep -qE '\$\(|`'; then
+    if echo "$command" | grep -qE '\$\(|\$\{|\$[A-Za-z_]|`'; then
       deny "Shell expansion detected near 'atlassian' keyword. Dynamic URL construction targeting Atlassian is not permitted."
     fi
   fi

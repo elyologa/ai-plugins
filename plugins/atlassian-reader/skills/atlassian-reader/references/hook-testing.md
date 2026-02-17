@@ -98,10 +98,13 @@ Test dynamic URL construction that evades the literal domain check:
 
 - `$(printf atlassian)` in the URL domain: `curl -X POST -d evil https://api.$(printf atlassian).com/rest/api/3/issue`
 - Backtick expansion in the URL domain: ``curl -X POST -d evil https://api.`echo atlassian`.com/rest/api/3/issue``
+- `${VAR}` brace expansion: `DOMAIN=atlassian; curl -X POST -d "evil" https://api.${DOMAIN}.com/rest/api/3/issue`
+- `$VAR` bare variable expansion: `H=atlassian; curl -X POST -d evil https://api.$H.com/rest/api/3/issue`
 
 Also verify the **safe cases**:
 
 - Literal `atlassian.com` domain with `$(...)` in auth header only (e.g. `$(printf ... | base64)`) must be ALLOWED — the literal domain matches first, so Gate 8 never runs
+- Literal `atlassian.com` domain with `$AUTH` or `${AUTH}` in auth header must be ALLOWED — same reason
 - Commands with no `atlassian` keyword at all must be ALLOWED
 
 ### Gate 9 — Per-segment data flag + `-G` validation (must be BLOCKED)
