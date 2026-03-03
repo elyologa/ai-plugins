@@ -59,7 +59,7 @@ async function handler(input: any): Promise<string> {
  */
 const listProjectsTool: ToolDefinition = {
   name: 'list_projects',
-  description: 'List accessible JIRA projects. Returns project names, keys, types, descriptions, and leads. Use project keys with list_boards or search_issues.',
+  description: 'List accessible JIRA projects. Returns project names, keys, types, descriptions, and leads. Use project keys with search_issues.',
   inputSchema: {
     type: 'object',
     properties: {

@@ -119,6 +119,7 @@ describe('validateInput', () => {
   });
 
   it('should include field path in error message', () => {
+    expect.assertions(1);
     try {
       validateInput(GetIssueSchema, { issueIdOrKey: 'bad' });
     } catch (e: any) {
