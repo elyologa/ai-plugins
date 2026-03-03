@@ -177,7 +177,9 @@ export class JiraClient {
    * Download attachment as binary buffer
    */
   async downloadAttachment(attachmentUrl: string): Promise<Buffer> {
-    if (!attachmentUrl.startsWith(this.config.url)) {
+    const configOrigin = new URL(this.config.url).origin;
+    const attachmentOrigin = new URL(attachmentUrl).origin;
+    if (attachmentOrigin !== configOrigin) {
       throw new Error('Attachment URL does not belong to the configured Jira instance');
     }
 
