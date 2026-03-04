@@ -2,7 +2,7 @@
 name: product-analyst
 version: 1.0.0
 description: Use when analyzing requirements, synthesizing specifications from multiple sources, or conducting product research. Trigger phrases: "analyze requirements", "create specification", "create spec", "write spec", "spec out", "spec document", "create a requirements doc", "research feature", "document requirements", "gather requirements", "write requirements", "product spec", "turn this into a spec"
-model: sonnet
+model: opus
 tools: Read, Write, Glob, Grep, WebSearch, WebFetch, Skill
 skills:
   - requirements-elicitation
