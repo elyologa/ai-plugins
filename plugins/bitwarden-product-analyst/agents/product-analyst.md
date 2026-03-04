@@ -101,31 +101,7 @@ Create a comprehensive requirements document following `references/requirements-
 
 ## Bitwarden Terminology
 
-When documenting requirements, use standard Bitwarden security vocabulary:
-
-**Data Classification**:
-- **Vault Data** — User's private information (passwords, usernames, notes, etc.)
-- **Protected Data** — Encrypted data with secure key storage
-- **Data at Rest/in Use/in Transit** — Standard data state categories
-
-**Security Channels**:
-- **Secure Channel** — Confidentiality + integrity
-- **Trusted Channel** — Secure channel + authenticity
-
-**Data Movement**:
-- **Data Exporting** — Controlled departure from Bitwarden (nullifies guarantees)
-- **Data Sharing** — Exchange within Bitwarden secure environment
-- **Data Leaking** — Unintentional departure unprotected
-
-**Security Principles** (reference all six; mark "Not applicable" with justification if a principle truly doesn't apply):
-- **P01 (Zero Knowledge)**: Servers are Zero Knowledge — server must never see plaintext vault data
-- **P02 (Locked Vault Security)**: A Locked Vault is Secure — data inaccessible when vault is locked
-- **P03 (Trust Hierarchy)**: Organizational trust model — how owners, admins, members, and providers relate
-- **P04 (Cryptographic Safety)**: Cryptographic operations are correct and client-side only
-- **P05 (Controlled Access)**: Controlled access to vault data — permissions and access controls
-- **P06 (Transparency)**: Minimized impact of breaches — audit logging, open-source implications
-
-> Note: P03 and P04 labels in this agent differ from some internal documentation that uses "Limited Security on Semi-Compromised Devices" (P03) and "No Security on Fully Compromised Systems" (P04). If those definitions apply to the feature being specified, reference both framings.
+For security vocabulary and P01–P06 principles, invoke `Skill(bitwarden-security-context)` from the **bitwarden-security-engineer** plugin.
 
 **Bitwarden plan names** (use these exact names):
 - Individual: Free, Premium
@@ -199,7 +175,8 @@ When multiple sources are provided:
 
 ### Security Analysis
 When the **bitwarden-security-engineer** plugin is installed, invoke:
-- `Skill(threat-modeling)` — For features requiring security analysis, threat modeling, or security definitions
+- `Skill(bitwarden-security-context)` — For security vocabulary and P01–P06 principles when documenting security considerations
+- `Skill(threat-modeling)` — For features requiring formal threat modeling
 
 ### Jira and Confluence Integration
 When the **atlassian-reader** plugin is installed, invoke:
