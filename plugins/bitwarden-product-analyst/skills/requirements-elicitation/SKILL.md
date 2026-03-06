@@ -5,18 +5,6 @@ description: Extract complete, unambiguous requirements from specifications. Use
 
 # Requirements Elicitation
 
-## Purpose
-
-Extract complete, unambiguous requirements from user specifications, stakeholder inputs, and technical documentation, identifying what needs to be built while clarifying unclear or missing information.
-
-## When to Use
-
-- Analyzing new feature requests or enhancement specifications
-- Processing GitHub issues into structured requirements
-- Breaking down large features into detailed components
-- Identifying missing, unclear, or conflicting information
-- Reviewing technical specifications for completeness
-
 ## Key Capabilities
 
 1. **Extract Requirements** — Identify functional and non-functional requirements from multiple sources

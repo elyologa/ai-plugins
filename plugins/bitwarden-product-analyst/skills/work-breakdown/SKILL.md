@@ -5,18 +5,6 @@ description: Break down features and requirements into actionable, implementable
 
 # Work Breakdown
 
-## Purpose
-
-Break down large features, enhancements, or requirements into small, actionable tasks that can be implemented independently with clear success criteria and proper sequencing.
-
-## When to Use
-
-- Planning implementation of new features or enhancements
-- Breaking down comprehensive requirements into development phases
-- Creating task lists for development teams
-- Organizing complex work into manageable, trackable pieces
-- Planning sprints, iterations, or development milestones
-
 ## Key Capabilities
 
 1. **Task Identification** — Identify discrete, implementable work units from high-level requirements
