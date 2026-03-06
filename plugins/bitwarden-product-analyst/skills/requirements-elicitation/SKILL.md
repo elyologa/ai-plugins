@@ -6,9 +6,11 @@ description: Extract complete, unambiguous requirements from specifications. Use
 # Requirements Elicitation
 
 ## Purpose
+
 Extract complete, unambiguous requirements from user specifications, stakeholder inputs, and technical documentation, identifying what needs to be built while clarifying unclear or missing information.
 
 ## When to Use
+
 - Analyzing new feature requests or enhancement specifications
 - Processing GitHub issues into structured requirements
 - Breaking down large features into detailed components
@@ -16,6 +18,7 @@ Extract complete, unambiguous requirements from user specifications, stakeholder
 - Reviewing technical specifications for completeness
 
 ## Key Capabilities
+
 1. **Extract Requirements** — Identify functional and non-functional requirements from multiple sources
 2. **Clarify Ambiguities** — Flag unclear specifications and formulate targeted questions
 3. **Identify Constraints** — Find technical, business, security, and resource limitations
@@ -24,33 +27,39 @@ Extract complete, unambiguous requirements from user specifications, stakeholder
 ## Approach
 
 ### 1. Read and Understand
+
 - Read entire specification thoroughly, including all referenced documents
 - Identify the primary source (main requirement) vs. supporting documentation
 - Note the scope and context of the request
 
 ### 2. Extract Explicit Requirements
+
 - Capture clearly stated requirements
 - Document exact specifications (API signatures, data formats, performance metrics)
 - Preserve technical details verbatim
 
 ### 3. Identify Implicit Requirements
+
 - Infer unstated but necessary requirements (e.g., error handling, validation, logging)
 - Consider security implications based on Bitwarden security principles (P01-P06)
 - Identify data classification needs (Vault Data, Protected Data, secure channels)
 
 ### 4. Flag Ambiguities and Gaps
+
 - Document unclear or missing information
 - Formulate specific questions to resolve ambiguities
 - Identify conflicting requirements between sources
 - Note assumptions being made
 
 ### 5. Document Constraints
+
 - Technical constraints (APIs, platforms, compatibility)
 - Security constraints (data protection, authentication, authorization)
 - Resource constraints (performance, storage, bandwidth)
 - Business constraints (timeline, scope, dependencies)
 
 ### 6. Create Acceptance Criteria
+
 - For each requirement, define testable acceptance criteria
 - Specify verification methods (commands, tests, manual checks)
 - Include edge cases and error scenarios
@@ -58,7 +67,9 @@ Extract complete, unambiguous requirements from user specifications, stakeholder
 ## Bitwarden-Specific Considerations
 
 ### Security Requirements
+
 Always consider and document:
+
 - **Data classification** — Is this Vault Data, Protected Data, or other?
 - **Data states** — Requirements for data at rest, in use, in transit
 - **Security channels** — Need for secure/trusted channels?
@@ -66,6 +77,7 @@ Always consider and document:
 - **Threat scenarios** — What could go wrong?
 
 ### Common Bitwarden Requirement Types
+
 - **Authentication/Authorization** — Who can access what?
 - **Encryption** — What data needs protection and how?
 - **Zero-knowledge** — Server must not have access to plaintext (P01)
@@ -119,6 +131,7 @@ Always consider and document:
 ## Best Practices
 
 ### Do's
+
 - ✅ Ask "what" questions, not "how" — Focus on requirements, not implementation
 - ✅ Document assumptions explicitly — Make implicit knowledge visible
 - ✅ Create testable acceptance criteria — Avoid vague success measures
@@ -128,6 +141,7 @@ Always consider and document:
 - ✅ Use Bitwarden vocabulary — Standard terminology for data, channels, security
 
 ### Don'ts
+
 - ❌ Avoid: Making technical implementation decisions — That's the architect's job
 - ❌ Avoid: Assuming unstated requirements are obvious — Explicit is better
 - ❌ Avoid: Generic acceptance criteria — "It works" is not testable
@@ -140,32 +154,38 @@ Organize extracted requirements in structured sections:
 
 ```markdown
 ## Functional Requirements
+
 1. REQ-F-001: [Specific capability the system must have]
    - **Acceptance Criteria**: [Testable condition]
    - **Priority**: Critical | High | Medium | Low
 
 ## Non-Functional Requirements
+
 - **Performance**: [Response time, throughput, resource usage]
 - **Reliability**: [Error handling, edge cases, availability]
 - **Compatibility**: [Platform support, backwards compatibility]
 - **Usability**: [User experience expectations]
 
 ## Security Requirements
+
 - **Data Classification**: [Vault Data | Protected Data | Other]
 - **Security Principles**: [P01, P02, P03, P04, P05, P06 as applicable]
 - **Threat Considerations**: [What could go wrong?]
 
 ## Constraints
+
 - **Technical**: [APIs, platforms, dependencies]
 - **Business**: [Timeline, scope, resources]
 - **Security**: [Compliance, encryption, authentication]
 
 ## Open Questions
+
 1. [Specific question needing stakeholder input]
 2. [Ambiguity requiring clarification]
 3. [Missing information that blocks complete specification]
 
 ## Assumptions
+
 - [Assumption 1: explicit statement of what's assumed]
 - [Assumption 2: should be validated with stakeholders]
 ```
@@ -173,6 +193,7 @@ Organize extracted requirements in structured sections:
 ## Integration with Work Breakdown
 
 After extracting requirements, use the `work-breakdown` skill to:
+
 - Organize requirements into implementable phases
 - Identify dependencies between requirements
 - Create actionable tasks for implementation teams

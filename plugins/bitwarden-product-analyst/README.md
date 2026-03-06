@@ -4,16 +4,16 @@ Claude Code skills for product analysis at Bitwarden. Generic AI assistance does
 
 ## Agent
 
-| Agent | What It Does |
-| ----- | ------------ |
+| Agent             | What It Does                                                                                                                                                                                                                                                                                                                       |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `product-analyst` | Reads Confluence initiative pages, Jira tickets, and other sources to produce structured requirements documents following Bitwarden's template. Applies security principles (P01–P06), distinguishes all four web surfaces and all plan tiers, attributes TBDs by owner (PM/Design/Engineering), and surfaces post-MVP candidates. |
 
 ## Skills
 
-| Skill | What It Does |
-| ----- | ------------ |
+| Skill                      | What It Does                                                                                                                                                                                                 |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `requirements-elicitation` | Extracts functional, non-functional, and security requirements from specifications. Flags ambiguities, identifies constraints, and creates testable acceptance criteria using Bitwarden security vocabulary. |
-| `work-breakdown` | Decomposes features into implementable tasks organized by phase. Identifies cross-repo dependencies (`bitwarden/server` vs. `bitwarden/clients`), task ordering, and team assignments. |
+| `work-breakdown`           | Decomposes features into implementable tasks organized by phase. Identifies cross-repo dependencies (`bitwarden/server` vs. `bitwarden/clients`), task ordering, and team assignments.                       |
 
 ## Usage
 

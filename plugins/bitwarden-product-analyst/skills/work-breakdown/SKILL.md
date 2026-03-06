@@ -6,9 +6,11 @@ description: Break down features and requirements into actionable, implementable
 # Work Breakdown
 
 ## Purpose
+
 Break down large features, enhancements, or requirements into small, actionable tasks that can be implemented independently with clear success criteria and proper sequencing.
 
 ## When to Use
+
 - Planning implementation of new features or enhancements
 - Breaking down comprehensive requirements into development phases
 - Creating task lists for development teams
@@ -16,6 +18,7 @@ Break down large features, enhancements, or requirements into small, actionable 
 - Planning sprints, iterations, or development milestones
 
 ## Key Capabilities
+
 1. **Task Identification** — Identify discrete, implementable work units from high-level requirements
 2. **Dependency Analysis** — Determine task order, relationships, and blocking dependencies
 3. **Scope Definition** — Create clear, bounded task descriptions with acceptance criteria
@@ -24,27 +27,32 @@ Break down large features, enhancements, or requirements into small, actionable 
 ## Approach
 
 ### 1. Read and Understand Requirements
+
 - Review the complete requirements document
 - Understand the full scope and all success criteria
 - Identify major components and subsystems affected
 - Note security requirements and constraints
 
 ### 2. Identify System Components
+
 - What parts of the codebase are affected?
 - Which APIs, services, databases, UIs need changes?
 - What external systems or dependencies are involved?
 - Are multiple platforms affected (web, desktop, mobile, CLI)?
 
 ### 3. Break into Phases
+
 Organize work into logical phases:
 
 **Phase 1: Architecture & Design**
+
 - Design system architecture and data models
 - Create sequence diagrams, data flow diagrams
 - Define API contracts and interfaces
 - Security threat modeling (if applicable)
 
 **Phase 2: Implementation**
+
 - Core functionality development
 - Database schema changes
 - API endpoint creation
@@ -52,6 +60,7 @@ Organize work into logical phases:
 - Integration work
 
 **Phase 3: Testing**
+
 - Unit test development
 - Integration test development
 - End-to-end test scenarios
@@ -59,13 +68,16 @@ Organize work into logical phases:
 - Cross-platform verification
 
 **Phase 4: Documentation & Deployment**
+
 - User documentation
 - API documentation
 - Deployment procedures
 - Migration scripts (if needed)
 
 ### 4. Define Individual Tasks
+
 Each task should be:
+
 - **Right-sized**: Completable in 2-8 hours (not days)
 - **Independent**: Can be worked on without blocking on other incomplete tasks (except explicit dependencies)
 - **Testable**: Has clear acceptance criteria that can be verified
@@ -73,12 +85,14 @@ Each task should be:
 - **Assigned**: Identified role or team (e.g., "Backend team", "Security team", "QA")
 
 ### 5. Identify Dependencies
+
 - What tasks must be completed before others can start?
 - Are there parallel work streams that can proceed independently?
 - What external dependencies exist (library updates, third-party APIs)?
 - What approval gates are needed (security review, design review)?
 
 ### 6. Validate Completeness
+
 - Do the tasks cover all functional requirements?
 - Are non-functional requirements addressed (performance, security, reliability)?
 - Is testing adequately planned?
@@ -91,6 +105,7 @@ Each task should follow this structure:
 
 ```markdown
 **Task X.Y**: [Concise task title]
+
 - **Description**: [What needs to be done]
 - **Team/Role**: [Backend | Frontend | Security | QA | DevOps]
 - **Estimated Duration**: [2-8 hours]
@@ -108,6 +123,7 @@ Each task should follow this structure:
 ### Phase 1: Architecture & Design
 
 **Task 1.1**: Design OAuth authentication flow
+
 - **Description**: Create sequence diagrams for OAuth login, token refresh, and logout flows
 - **Team/Role**: Backend architecture team
 - **Estimated Duration**: 3-4 hours
@@ -122,6 +138,7 @@ Each task should follow this structure:
   - Addresses security principle P05 (Controlled Access to Vault Data)
 
 **Task 1.2**: Design database schema for OAuth users and sessions
+
 - **Description**: Define database schema for storing OAuth provider information, user mappings, and session tokens
 - **Team/Role**: Backend architecture team
 - **Estimated Duration**: 2-3 hours
@@ -136,6 +153,7 @@ Each task should follow this structure:
   - Supports multiple OAuth providers per user
 
 **Task 1.3**: Security threat modeling for OAuth integration
+
 - **Description**: Conduct threat modeling session to identify OAuth-specific security risks
 - **Team/Role**: Security team (can use `Skill(threat-modeling)` if available)
 - **Estimated Duration**: 3-4 hours
@@ -154,6 +172,7 @@ Each task should follow this structure:
 ### Phase 2: Implementation
 
 **Task 2.1**: Implement OAuth client library integration
+
 - **Description**: Integrate OAuth client libraries for Google and GitHub, implement authorization code flow
 - **Team/Role**: Backend implementation team
 - **Estimated Duration**: 6-8 hours
@@ -168,6 +187,7 @@ Each task should follow this structure:
   - Implements PKCE for additional security
 
 **Task 2.2**: Implement user session management
+
 - **Description**: Create session middleware to manage OAuth tokens, refresh logic, and user authentication state
 - **Team/Role**: Backend implementation team
 - **Estimated Duration**: 4-6 hours
@@ -182,6 +202,7 @@ Each task should follow this structure:
   - Encrypted token storage (P02)
 
 **Task 2.3**: Implement authentication middleware
+
 - **Description**: Create middleware to protect routes requiring authentication, verify OAuth tokens
 - **Team/Role**: Backend implementation team
 - **Estimated Duration**: 3-4 hours
@@ -196,6 +217,7 @@ Each task should follow this structure:
   - Returns 403 for unauthorized access attempts
 
 **Task 2.4**: Create OAuth login UI components
+
 - **Description**: Build UI components for OAuth provider selection and login flow
 - **Team/Role**: Frontend implementation team
 - **Estimated Duration**: 4-5 hours
@@ -210,6 +232,7 @@ Each task should follow this structure:
   - Shows clear error messages for failed authentication
 
 **Task 2.5**: Implement user account linking
+
 - **Description**: Allow existing users to link OAuth providers to their accounts
 - **Team/Role**: Backend implementation team
 - **Estimated Duration**: 5-6 hours
@@ -228,6 +251,7 @@ Each task should follow this structure:
 ### Phase 3: Testing
 
 **Task 3.1**: Write OAuth integration unit tests
+
 - **Description**: Create comprehensive unit tests for OAuth client, session management, and authentication middleware
 - **Team/Role**: QA team / Backend team
 - **Estimated Duration**: 5-6 hours
@@ -242,6 +266,7 @@ Each task should follow this structure:
   - Security checks validated (CSRF, token encryption)
 
 **Task 3.2**: Create OAuth integration end-to-end tests
+
 - **Description**: Build automated E2E tests using test OAuth providers
 - **Team/Role**: QA team
 - **Estimated Duration**: 6-8 hours
@@ -257,6 +282,7 @@ Each task should follow this structure:
   - Tests run on Chrome, Firefox, Safari
 
 **Task 3.3**: Manual cross-platform testing
+
 - **Description**: Manually test OAuth on all Bitwarden clients (web, desktop, mobile)
 - **Team/Role**: QA team
 - **Estimated Duration**: 4-5 hours
@@ -271,6 +297,7 @@ Each task should follow this structure:
   - No regressions in existing authentication
 
 **Task 3.4**: Security testing and penetration testing
+
 - **Description**: Conduct security-focused testing of OAuth implementation
 - **Team/Role**: Security team
 - **Estimated Duration**: 6-8 hours
@@ -290,6 +317,7 @@ Each task should follow this structure:
 ### Phase 4: Documentation & Deployment
 
 **Task 4.1**: Write OAuth setup documentation
+
 - **Description**: Create user-facing documentation for setting up and using OAuth login
 - **Team/Role**: Technical writing team
 - **Estimated Duration**: 3-4 hours
@@ -304,6 +332,7 @@ Each task should follow this structure:
   - Addresses common issues
 
 **Task 4.2**: Create API documentation for OAuth endpoints
+
 - **Description**: Document all OAuth-related API endpoints for developer reference
 - **Team/Role**: Backend team / Technical writing
 - **Estimated Duration**: 2-3 hours
@@ -318,6 +347,7 @@ Each task should follow this structure:
   - Rate limits and constraints noted
 
 **Task 4.3**: Prepare deployment and migration procedures
+
 - **Description**: Create deployment scripts, database migrations, and rollout plan
 - **Team/Role**: DevOps team
 - **Estimated Duration**: 4-5 hours
@@ -334,6 +364,7 @@ Each task should follow this structure:
 ---
 
 **Why This Breakdown Works**:
+
 - ✅ Each task is 2-8 hours (right-sized for tracking)
 - ✅ Clear dependencies prevent blocking and enable parallel work
 - ✅ Phases group related work logically
@@ -345,6 +376,7 @@ Each task should follow this structure:
 ## Best Practices
 
 ### Do's
+
 - ✅ **Right-size tasks** — 2-8 hours each, not full days or weeks
 - ✅ **Clear acceptance criteria** — Must be testable and specific
 - ✅ **Assign appropriate teams** — Match task to expertise
@@ -357,6 +389,7 @@ Each task should follow this structure:
 - ✅ **Think cross-platform** — Bitwarden runs everywhere; plan for it
 
 ### Don'ts
+
 - ❌ **Tasks too large** — >1 day tasks should be broken down further
 - ❌ **Vague acceptance criteria** — "Make it work" is not testable
 - ❌ **Circular dependencies** — Tasks shouldn't block each other in loops
@@ -373,6 +406,7 @@ Organize work breakdown in structured phases:
 # Work Breakdown: [Feature Name]
 
 ## Summary
+
 - **Total Estimated Duration**: X-Y hours
 - **Number of Tasks**: N tasks across M phases
 - **Teams Involved**: [List of teams]
@@ -381,9 +415,11 @@ Organize work breakdown in structured phases:
 ---
 
 ## Phase 1: [Phase Name]
+
 **Goal**: [What this phase accomplishes]
 
 **Task 1.1**: [Task title]
+
 - **Description**: [What needs to be done]
 - **Team/Role**: [Who does this]
 - **Estimated Duration**: [Hours]
@@ -397,6 +433,7 @@ Organize work breakdown in structured phases:
 ---
 
 ## Phase 2: [Phase Name]
+
 ...
 
 ---
@@ -404,6 +441,7 @@ Organize work breakdown in structured phases:
 ## Verification
 
 After all phases complete, verify:
+
 - [ ] All functional requirements implemented
 - [ ] All non-functional requirements met
 - [ ] All security requirements addressed
@@ -415,6 +453,7 @@ After all phases complete, verify:
 ## Integration with Requirements Elicitation
 
 This skill works best when preceded by `requirements-elicitation` to ensure:
+
 - All requirements are clearly understood before breaking down work
 - Security and non-functional requirements are identified upfront
 - Open questions are resolved before task creation

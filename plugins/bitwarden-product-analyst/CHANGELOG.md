@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2026-03-04
 
 ### Added
+
 - Initial release of Bitwarden Product Analyst plugin
 - Product analyst agent for creating comprehensive Bitwarden requirements documents
 - `requirements-elicitation` skill for extracting and organizing requirements
