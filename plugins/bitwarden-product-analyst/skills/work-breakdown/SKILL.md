@@ -1,6 +1,6 @@
 ---
 name: work-breakdown
-description: Break down features and requirements into actionable, implementable tasks with clear scope and acceptance criteria. Use when planning implementation, organizing complex work, or creating task lists. Trigger phrases: "break down tasks", "create work plan", "organize implementation", "plan development"
+description: Break down features and requirements into actionable, implementable tasks with clear scope and acceptance criteria. Use when planning implementation, organizing complex work, or creating task lists. Trigger phrases: "break down tasks", "create work plan", "organize implementation", "plan development". This skill works best when preceded by `requirements-elicitation` skill use.
 ---
 
 # Work Breakdown
@@ -182,12 +182,3 @@ After all phases complete, verify:
 - [ ] Documentation complete and accurate
 - [ ] Deployment procedures tested
 ```
-
-## Integration with Requirements Elicitation
-
-This skill works best when preceded by `requirements-elicitation` to ensure:
-
-- All requirements are clearly understood before breaking down work
-- Security and non-functional requirements are identified upfront
-- Open questions are resolved before task creation
-- Constraints and dependencies are known
