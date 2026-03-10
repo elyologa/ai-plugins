@@ -23,11 +23,13 @@ Create detailed requirements documents for Bitwarden features and enhancements b
 
 ## Output Location
 
-Save all generated spec documents to:
+Save all generated spec documents to the current working directory (the directory from which Claude was invoked):
 
 ```
-plugins/bitwarden-product-analyst/specs/<kebab-case-feature-name>.md
+./<kebab-case-feature-name>.md
 ```
+
+Do not save output inside the plugin directory.
 
 ## Your Process
 
@@ -42,6 +44,11 @@ Primary source types (in priority order):
 - **Confluence product initiative page** — the canonical PM artifact at Bitwarden; often partially filled with key decisions already made
 - **Jira epic or story** — may contain acceptance criteria and linked sub-tasks
 - **GitHub issues** — engineering-originated requests with technical detail
+- **Generic web URLs** — any URL the user provides; use `WebFetch` to retrieve the content directly — do not ask the user to paste it
+- **Local files or directories** — markdown docs, PRDs, design briefs, meeting notes, or any file/directory the user provides a path to:
+  - Single file: use `Read` to access it directly
+  - Directory: use `Glob` to discover all files, then `Read` each relevant one; use `Grep` to search across files for specific content
+  - Do not ask the user to paste content — read it directly from the path provided
 - **Referenced investigation docs** (Google Sheets, other Confluence pages) — fetch these too if linked and accessible
 - **User-provided descriptions** — capture directly from the conversation
 
@@ -172,7 +179,7 @@ When multiple sources are provided:
 - ✅ **Note cross-repo dependencies** — Always flag when `bitwarden/server` changes must precede client work
 - ✅ **Check iterative delivery** — Flag any scope that seems to exceed a small/medium or a quarter
 - ✅ **Include verification** — Provide concrete commands/tests to verify completion
-- ✅ **Save to specs/** — Write the output file to `plugins/bitwarden-product-analyst/specs/`
+- ✅ **Save to current directory** — Write the output file to the current working directory (where Claude was invoked), not inside the plugin directory
 - ❌ **Don't assume** — If information is missing, use `AskUserQuestion` to offer the choice: answer it now or mark it as TBD with owner attribution
 - ❌ **Don't over-engineer** — Match detail to scope; don't add unnecessary complexity
 - ❌ **Don't skip sections** — Address all template sections
