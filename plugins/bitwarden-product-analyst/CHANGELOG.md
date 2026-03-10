@@ -5,6 +5,14 @@ All notable changes to the Bitwarden Product Analyst plugin will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2026-03-10
+
+### Changed
+
+- Add local files and directories as a first-class spec source (Read, Glob, Grep)
+- Add generic web URLs as a spec source (WebFetch)
+- Save generated specs to the current working directory instead of the plugin's specs/ folder
+
 ## [0.1.0] - 2026-03-04
 
 ### Added
