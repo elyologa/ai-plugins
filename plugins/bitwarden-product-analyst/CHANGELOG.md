@@ -5,6 +5,13 @@ All notable changes to the Bitwarden Product Analyst plugin will be documented i
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2026-03-12
+
+### Fixed
+
+- Corrected agent path in `plugin.json` from `./agents/product-analyst/AGENT.md` to `./agents/product-analyst.md` so the plugin can discover its agent
+- Fixed malformed code fence in `references/requirements-template.md` where the outer `````markdown` block closed prematurely after section 9, leaving sections 10–15 outside the template block
+
 ## [0.1.1] - 2026-03-10
 
 ### Changed

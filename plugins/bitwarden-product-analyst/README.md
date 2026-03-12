@@ -15,6 +15,20 @@ Claude Code skills for product analysis at Bitwarden. Generic AI assistance does
 | `requirements-elicitation` | Extracts functional, non-functional, and security requirements from specifications. Flags ambiguities, identifies constraints, and creates testable acceptance criteria using Bitwarden security vocabulary. |
 | `work-breakdown`           | Decomposes features into implementable tasks organized by phase. Identifies cross-repo dependencies (`bitwarden/server` vs. `bitwarden/clients`), task ordering, and team assignments.                       |
 
+## Installation
+
+Available through Bitwarden's internal Claude Code marketplace:
+
+```bash
+# Add the Bitwarden marketplace (if not already added)
+/plugin marketplace add https://github.com/bitwarden/ai-plugins
+
+# Install the product analyst plugin
+/plugin install bitwarden-product-analyst@bitwarden-marketplace
+
+# Restart Claude Code
+```
+
 ## Usage
 
 ```

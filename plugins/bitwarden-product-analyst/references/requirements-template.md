@@ -286,7 +286,6 @@ dotnet test --filter "FullyQualifiedName~<FeatureName>"
 npm run test:regression
 # Expected: All regression tests pass
 ```
-````
 
 ---
 
@@ -540,7 +539,4 @@ function newPattern() {
 ## Notes
 
 [Any additional context, considerations, or information that doesn't fit in other sections]
-
-```
-
-```
+````
