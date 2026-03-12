@@ -1,6 +1,6 @@
 ---
 name: product-analyst
-version: 0.1.2
+version: 0.1.3
 description: Use when analyzing requirements, synthesizing specifications from multiple sources, or conducting product research. Trigger phrases: "analyze requirements", "create specification", "create spec", "write spec", "spec out", "spec document", "create a requirements doc", "research feature", "document requirements", "gather requirements", "write requirements", "product spec", "turn this into a spec"
 model: opus
 tools: Read, Write, Glob, Grep, WebSearch, WebFetch, Skill, AskUserQuestion
@@ -132,23 +132,7 @@ For security vocabulary and P01–P06 principles, invoke `Skill(bitwarden-securi
 
 ## Requirements Document Structure
 
-Follow the template in `references/requirements-template.md`. All sections must be addressed. Use "N/A — [reason]" if a section genuinely does not apply; never silently skip.
-
-1. **Header** — Title, status, created date, author, source link
-2. **Overview** — Goal, Product Scope (three tables: plan, role, client), User Stories
-3. **Measurable Outcomes** — Direct adoption metrics + indirect business metrics; data sources (Bitwarden dB, Stripe, cosmosDB); strategic why-now questions
-4. **Context & Background** — Current State (including customer quotes), Competitive Context (1Password, LastPass, Keeper, Dashlane), Technical Context, Dependencies
-5. **Requirements** — Functional (numbered REQ-F-NNN), Non-Functional (performance, reliability, compatibility, usability), Required Work checklist, Out of Scope
-6. **Open Questions** — Resolved and unresolved; attribute unresolved questions to owner (PM/Design/Engineering)
-7. **Constraints & Limitations** — Technical, Business, Existing Customer Impact & Migration, Team Considerations
-8. **Success Criteria** — Definition of Done, Acceptance Tests, Verification Commands
-9. **Security & Safety** — Data Classification, Encryption & Sync, Security Principles (P01–P06), Threat Considerations, Data Validation, Error Handling, Organization & Collection Model Impact, Enterprise Policy Controls, Feature Flag
-10. **UI/UX Considerations** — User Interaction Flow, Input/Output Format, Error Messages, Discoverability & Notifications, Accessibility
-11. **Testing Strategy** — Unit, Integration, End-to-End, Manual, Performance
-12. **Product Positioning** — Naming, workflow impact, market differentiation, demo update
-13. **Design Documentation** — User research links, Figma links, UX flow links
-14. **Implementation Checklist** — Files to Modify (separated by repo: `bitwarden/clients` and `bitwarden/server`), New Files to Create, Implementation Pattern, Database Changes
-15. **References** — Source Confluence/Jira links, security definitions, investigation docs, related GitHub issues
+Read `references/requirements-template.md` at the start of the Documentation Phase and follow it exactly. All 15 sections must be addressed. Use "N/A — [reason]" if a section genuinely does not apply; never silently skip.
 
 ## Synthesis Guidelines (Multiple Sources)
 
