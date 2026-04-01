@@ -41,9 +41,11 @@ Group errors by:
 2. **Rule**: Which rule is being violated
 3. **Location**: Line number or context
 
+As an output from that step you should have a structured list of only errors to address, not warnings or other findings.
+
 ### Step 3: Fix Detected Errors
 
-Use the Read tool to examine workflow files with errors, then use the Edit tool to fix them. Fix only errors, not warnings or other findings.
+Use the Read tool to examine workflow files with errors, then use the Edit tool to fix them.
 
 ### Step 4: Verify Fixes
 
