@@ -50,6 +50,7 @@ Add the following rule to your user `CLAUDE.md` if you want Claude to check its 
 General-purpose documentation evaluator. Reviews any software documentation for clarity, accuracy, audience fit, and alignment with the code it describes. Operates in-place — it evaluates what exists now, not what changed.
 
 ```
+# DO NOT use `@` notation for files
 Use the documentation-evaluator agent to review the documentation in src/services/auth.ts
 ```
 
