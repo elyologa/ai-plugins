@@ -71,10 +71,7 @@ This plugin is written with a strict information architecture to ensure that the
 
 Subagents are given a specific set of directions through skill injection, which inserts the evaluator's skills directly into its system prompt. Guidance from the main agent is fed in as a user prompt. Since interactivity isn't possible and the main agent cannot read the evaluator skills, the evaluation criteria should reliably override agent input.
 
-The subagent returns its data to the main agent. The main agent tends to act on findings that align with its current task and discard the rest.
-
-> [!NOTE]
-> **Want to help?** Skills for followup passes are not yet defined. Try using Claude to identify good candidates for tech debt cleanup using these FIXMEs and contribute a new skill!
+The subagent returns its data to the main agent. Feedback directly relevant to the agent task is typically accepted, after which the agent returns control to its operator.
 
 ### Agents
 
@@ -82,7 +79,12 @@ The subagents are intentionally concise. Each configures a persona and establish
 
 ### The FIXME feedback loop
 
-FIXME instructions in the check-your-work skill capture deferred feedback so it isn't lost. The health-evaluator subagent looks for `FIXME` comments as a strong signal for health hazards. Technical debt in one evaluation can, thus, compound in the next.
+The main agent tends to act on findings that align with its current task and discard the rest. FIXME instructions in the check-your-work skill capture deferred feedback so it isn't lost.
+
+The health-evaluator subagent looks for `FIXME` comments as a strong signal for health hazards. Technical debt in one evaluation can, thus, compound in the next.
+
+> [!NOTE]
+> **Want to help?** Skills for followup passes are not yet defined. Try using Claude to identify good candidates for tech debt cleanup using these FIXMEs and contribute a new skill!
 
 ### Skills
 
