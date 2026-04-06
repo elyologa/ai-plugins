@@ -1,4 +1,4 @@
-# Claude Check Your Work Plugin
+# Claude, Check Your Work! Plugin
 
 Subagents that help Claude self-evaluate their work, apply iterative edits, and label emerging concerns.
 
