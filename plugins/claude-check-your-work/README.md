@@ -1,6 +1,6 @@
 # Claude, Check Your Work! Plugin
 
-Subagents that help Claude self-evaluate their work, apply iterative edits, and label emerging concerns.
+Subagents that help Claude self-evaluate its work, apply iterative edits, and label emerging concerns.
 
 > [!WARNING]
 > **Use of this plugin to check hand-written code is not recommended.**
