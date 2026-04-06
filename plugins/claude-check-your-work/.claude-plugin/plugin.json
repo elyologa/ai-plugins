@@ -1,0 +1,17 @@
+{
+  "name": "claude-check-your-work",
+  "version": "0.1.0",
+  "description": "Evaluation subagents that help agents self-evaluate their work, apply iterative edits, and label emerging concerns.",
+  "author": {
+    "name": "Bitwarden",
+    "url": "https://github.com/bitwarden"
+  },
+  "homepage": "https://github.com/bitwarden/ai-plugins/tree/main/plugins/claude-check-your-work",
+  "repository": "https://github.com/bitwarden/ai-plugins",
+  "keywords": ["evaluation", "self-review", "code-quality", "subagents"],
+  "agents": [
+    "./agents/documentation-evaluator/AGENT.md",
+    "./agents/health-evaluator/AGENT.md",
+    "./agents/unit-test-evaluator/AGENT.md"
+  ]
+}

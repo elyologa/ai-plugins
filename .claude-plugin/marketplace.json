@@ -63,6 +63,12 @@
       "source": "./plugins/bitwarden-security-engineer",
       "version": "0.2.0",
       "description": "Application security engineering assistant for vulnerability triage, threat modeling, and secure code analysis."
+    },
+    {
+      "name": "claude-check-your-work",
+      "source": "./plugins/claude-check-your-work",
+      "version": "0.1.0",
+      "description": "Evaluation subagents that help agents self-evaluate their work, apply iterative edits, and label emerging concerns."
     }
   ]
 }
