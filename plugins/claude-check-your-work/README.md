@@ -8,6 +8,46 @@ This plugin provides focused evaluation agents designed to be invoked as subagen
 
 The primary workflow is described by the `check-your-work` skill: after completing a task, an orchestrating agent launches the appropriate evaluator(s), reviews findings, applies edits, and lists any deferred concerns.
 
+## Installation
+
+Available through the Bitwarden AI plugins marketplace:
+
+```
+/install claude-check-your-work@bitwarden-marketplace
+```
+
+## Usage
+
+| Component | Type | Description |
+|-----------|------|-------------|
+| `check-your-work` | skill | Workflow guide for launching evaluator subagents after completing a task |
+| `documentation-evaluator` | agent | Reviews documentation for clarity, accuracy, and audience fit |
+| `health-evaluator` | agent | Assesses structural health, tech debt, coupling, and reversibility |
+| `unit-test-evaluator` | agent | Reviews test design for meaningful behavior coverage and anti-patterns |
+
+The agents can also be invoked directly:
+
+```
+# Review documentation for a specific file
+Use the documentation-evaluator agent to review the documentation in src/services/auth.ts
+
+# Assess structural health after a change
+Use the health-evaluator agent to perform a retrospective review of the auth module changes
+
+# Review unit test design
+Use the unit-test-evaluator agent to review the tests in src/services/auth.spec.ts
+```
+
+### Checking your work
+
+The `check-your-work` skill orchestrates the evaluators. It contains a workflow guide that launches evaluator subagents based on the kind of work Claude performed. Concerns that are not addressed are documented as FIXME comments and surfaced for your review with files and line numbers.
+
+Add the following rule to your user `CLAUDE.md` if you want Claude to check its work automatically:
+
+```markdown
+**IMPORTANT:** Every time you change code, be sure to use `Skill(claude-check-your-work:check-your-work)` to ensure that your work adheres to the proper standards. Your work is not complete until you have checked your code.
+```
+
 ## Agents
 
 ### Documentation Evaluator
@@ -25,17 +65,35 @@ Structural health evaluator. Assesses the environment a change will land in (or 
 
 Unit test design evaluator. Assesses whether tests verify meaningful behaviors, catches common anti-patterns, and identifies opportunities for consolidation. Runs the tests first to confirm they pass before reviewing.
 
-## Skills
+## Information Architecture
+
+This plugin is written with a strict information architecture to ensure that the system under evaluation is isolated from implementation knowledge. It uses Claude Code's subagent and skill gating features to enforce this.
+
+Subagents are given a specific set of directions through skill injection, which inserts the evaluator's skills directly into its system prompt. Guidance from the main agent is fed in as a user prompt. Since interactivity isn't possible and the main agent cannot read the evaluator skills, the evaluation criteria should reliably override agent input.
+
+The subagent returns its data to the main agent. The main agent tends to act on findings that align with its current task and discard the rest.
+
+> [!NOTE]
+> **Want to help?** Skills for followup passes are not yet defined. Try using Claude to identify good candidates for tech debt cleanup using these FIXMEs and contribute a new skill!
+
+### Agents
+
+The subagents are intentionally concise. Each configures a persona and establishes high-level objectives. The bulk of their instructions are in skill definitions.
+
+### The FIXME feedback loop
+
+FIXME instructions in the check-your-work skill capture deferred feedback so it isn't lost. The health-evaluator subagent looks for `FIXME` comments as a strong signal for health hazards. Technical debt in one evaluation can, thus, compound in the next.
+
+### Skills
 
 | Skill | Invocation | Description |
 |-------|------------|-------------|
-| `check-your-work` | user or agent | Workflow guide for launching evaluator subagents after completing a task |
 | `evaluate-documentation` | subagent import | Criteria and report template for documentation quality review |
 | `evaluate-health` | subagent import | Criteria and report template for structural health review |
 | `evaluate-unit-tests` | subagent import | Criteria and report template for unit test design review |
-| `guide-on-situational-awareness` | automatic | Guide for understanding your work environment, tracing data flow, and locating specific text or symbols in the codebase |
+| `guide-on-situational-awareness` | automatic | Guide for tracing data flow, message passing, localized text, and recurring patterns |
 
-### `evaluate-*` Skills
+#### `evaluate-*` Skills
 
 These skills form a skill library for subagents. Importing into a subagent is the only supported invocation method — both user invocation and model invocation are disabled. An agent implementing a change must never invoke an `evaluate-*` skill directly, because that agent is prone to rationalize away the skill's advice. The import requirement ensures the subagent has the skill text and provides isolation from the implementing agent's context.
 
@@ -44,7 +102,7 @@ Evaluate skills never reference subagents.
 > [!NOTE]
 > **Want to help?** Using subagents is expensive, since they need to rediscover context. The `evaluate-*` skills are independent so that you can experiment with them. If you make a subagent with better token efficiency, please submit a PR!
 
-### `guide-*` Skills
+#### `guide-*` Skills
 
 Guide skills are excluded from the user-invocable list. They are designed for Claude to read automatically and may be used by subagents or the main agent.
 
@@ -53,43 +111,3 @@ Guide skills never reference subagents.
 > [!NOTE]
 > **Want to help?** The `guide-on-situational-awareness` skill includes tracing methodologies for localized text and message passing in the Bitwarden `clients` repository. If you develop a new tracing methodology for a different area of the codebase, consider contributing it as a resource under this skill.
 
-## Usage
-
-### Via check-your-work
-
-The `check-your-work` skill orchestrates the evaluators. After completing implementation work, it guides the agent through:
-
-1. Launching the appropriate evaluator subagent(s)
-2. Reviewing findings
-3. Applying recommended edits
-4. Documenting deferred concerns as FIXME comments
-5. Listing ignored findings with rationale
-
-### Direct invocation
-
-Evaluators can also be invoked directly:
-
-```
-# Review documentation for a specific file
-Use the documentation-evaluator agent to review the documentation in src/services/auth.ts
-
-# Assess structural health after a change
-Use the health-evaluator agent to perform a retrospective review of the auth module changes
-
-# Review unit test design
-Use the unit-test-evaluator agent to review the tests in src/services/auth.spec.ts
-```
-
-## Installation
-
-Available through the Bitwarden AI plugins marketplace:
-
-```
-/install claude-check-your-work@bitwarden-marketplace
-```
-
-Once installed, add the following rule to your user `CLAUDE.md`:
-
-```markdown
-**IMPORTANT:** Every time you change code, be sure to use `Skill(claude-check-your-work:check-your-work)` to ensure that your work adheres to the proper standards. Your work is not complete until you have checked your code.
-```
