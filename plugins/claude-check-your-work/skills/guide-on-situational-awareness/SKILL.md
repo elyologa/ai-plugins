@@ -18,7 +18,14 @@ To trace localized strings through the Bitwarden `clients` repository (e.g., fin
 
 ### Tracing Message Passing
 
-To trace messages through the browser extension's messaging system (content script, service worker, popup), use the [message passing instructions](./resources/clients-message-passing-instructions.md).
+To trace messages through the browser extension's messaging system, use the [message passing instructions](./resources/clients-message-passing-instructions.md). Reach for this when you encounter:
+
+- A `sendExtensionMessage()` call (content script → service worker)
+- A `BrowserApi.tabSendMessage()` call (service worker → content script)
+- A `chrome.runtime.sendMessage()` call (broadcast)
+- A `BrowserApi.messageListener()` registration
+- A `chrome.runtime.onMessage.addListener()` registration
+- An `extensionMessageHandlers` or similar handler map on a class
 
 ## Key Patterns to Look For
 

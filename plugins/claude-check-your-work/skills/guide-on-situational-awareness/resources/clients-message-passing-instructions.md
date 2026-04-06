@@ -7,17 +7,6 @@ Best Practices:
 
 See [message-passing](../examples/clients-message-passing.md) for an example of this process.
 
-## When to Use This
-
-Use this methodology when you encounter:
-
-- A `sendExtensionMessage()` call (content script → service worker)
-- A `BrowserApi.tabSendMessage()` call (service worker → content script)
-- A `chrome.runtime.sendMessage()` call (broadcast)
-- A `BrowserApi.messageListener()` registration
-- A `chrome.runtime.onMessage.addListener()` registration
-- An `extensionMessageHandlers` or similar handler map on a class
-
 ## Step 1: Identify the Message
 
 Find the command string being sent. Messages in this codebase are identified by a `command` field.
