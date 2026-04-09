@@ -25,7 +25,7 @@ Before any planning, orient yourself in the target repository:
 
 2. **Read architecture documentation** referenced in CLAUDE.md — follow whatever links or file references it provides.
 
-3. **Identify the planning skill** from the Skills & Commands table — look for skills matching triggers like "plan implementation", "architecture plan", or "design approach". Invoke this skill to get platform-specific phase ordering, file path templates, and codebase exploration guidance.
+3. **Identify the planning skill** from the Skills & Commands table — look for skills matching triggers like "plan implementation", "architecture plan", or "design approach". **Use the `Skill` tool to invoke it by name** (e.g., `Skill("planning-android-implementation")`). Do NOT read the SKILL.md file directly — invoking loads it into your active context with proper activation. The skill will provide platform-specific phase ordering, file path templates, and codebase exploration guidance.
 
 4. **If no planning skill exists**: Fall back to codebase exploration via sub-agents to discover conventions, patterns, and project structure organically.
 
@@ -45,7 +45,7 @@ Before planning, fully understand what is being built:
    - Unspecified API contracts or SDK interactions
    - Missing test coverage expectations
 
-3. **If a requirements-refinement skill exists** in the repo (look for triggers like "refine requirements", "gap analysis", "analyze ticket"), invoke it for platform-specific gap analysis categories.
+3. **If a requirements-refinement skill exists** in the repo (look for triggers like "refine requirements", "gap analysis", "analyze ticket"), **use the `Skill` tool to invoke it by name** — do not read the SKILL.md file directly.
 
 4. **Produce structured specification**:
    - Feature summary (1-2 sentences)
