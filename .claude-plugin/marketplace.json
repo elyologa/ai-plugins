@@ -63,6 +63,12 @@
       "source": "./plugins/bitwarden-architect",
       "version": "0.1.0",
       "description": "Generic software architect agent for planning features across any Bitwarden repository. Discovers platform context dynamically via CLAUDE.md and repo-local planning skills."
+    },
+    {
+      "name": "bitwarden-delivery-tools",
+      "source": "./plugins/bitwarden-delivery-tools",
+      "version": "0.1.0",
+      "description": "Generic delivery workflow skills for committing, PR creation, preflight checks, and change labeling across any Bitwarden repository."
     }
   ]
 }
