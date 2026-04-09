@@ -5,7 +5,7 @@ An agent implementing a change is poorly positioned to evaluate its own work —
 This plugin addresses both problems. Evaluator subagents, inspired by Anthropic's [harness design case study](https://www.anthropic.com/engineering/harness-design-long-running-apps), isolate evaluation from implementation — trading token efficiency of up-front guidance for improved task focus overall. Progressive skill disclosure, following best practices from Anthropic's [skill-building guide](https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf), keeps the main agent's context lean and surfaces evaluation criteria only when needed.
 
 ```mermaid
-graph TD
+flowchart TD
     subgraph &nbsp;
         direction LR
         ENTRY(["ENTRYPOINT"]) --> CYW["check-your-work"]
@@ -45,7 +45,7 @@ The subagents are intentionally concise. Each configures a persona and establish
 Forked skills are avoided in evaluators because guide skills are expected to have general utility spanning evaluator boundaries. Injecting these skills directly into the subagent's system prompt ensures efficacy can be measured reliably.
 
 ```mermaid
-graph LR
+flowchart LR
     GUIDANCE["guidance from<br>main agent"] --> HE
     subgraph &nbsp;
         direction TB
@@ -87,7 +87,7 @@ The `evaluate-health` skill illustrates this pattern:
 3. **Step 5 — Report:** The skill loads [`report.md`](./skills/evaluate-health/resources/report.md), a structured template for the output.
 
 ```mermaid
-graph TD
+flowchart TD
     SKILL["evaluate-health"]
     SKILL --> VERIFY["Step 1: Verify"]
     VERIFY --> SCOPE["Step 2: Broaden Scope"]
