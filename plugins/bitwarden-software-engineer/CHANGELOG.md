@@ -5,6 +5,17 @@ All notable changes to the `bitwarden-software-engineer` plugin will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-04-08
+
+### Changed
+
+- Agent now autonomously drives full implementation lifecycle with self-review protocol (implement, test, build, preflight, commit)
+- Added dynamic context discovery via CLAUDE.md Skills & Commands table — agent discovers and invokes repo-local skills at runtime
+- Added `Agent` and `Skill` (bare) to tools for dynamic discovery and sub-agent deployment
+- Removed preloaded skill frontmatter — all skills are now discovered dynamically from CLAUDE.md and installed plugins
+- Added decision-making framework and critical rules from per-repo implementer agents
+- Replaces per-repo implementer agents (`android-implementer`, `ios-implementer`)
+
 ## [0.3.0] - 2026-02-23
 
 ### Added
