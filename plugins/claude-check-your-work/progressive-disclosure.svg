@@ -39,7 +39,6 @@
 
   <!-- Arrow: Step 4 → anticipated-changes.md (prospective, zig-zag) -->
   <path d="M 245 258 L 310 258 L 310 236 L 368 236" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <text x="270" y="252" font-size="11" fill="#0f172a" font-style="italic">prospective</text>
 
   <!-- anticipated-changes.md -->
   <rect x="370" y="219" width="185" height="34" rx="4" fill="#f7fafc" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 3"/>
@@ -48,7 +47,6 @@
 
   <!-- Arrow: Step 4 → introduced-changes.md (retrospective, zig-zag) -->
   <path d="M 245 274 L 310 274 L 310 296 L 368 296" fill="none" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <text x="265" y="289" font-size="11" fill="#0f172a" font-style="italic">retrospective</text>
 
   <!-- introduced-changes.md -->
   <rect x="370" y="279" width="185" height="34" rx="4" fill="#f7fafc" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 3"/>
