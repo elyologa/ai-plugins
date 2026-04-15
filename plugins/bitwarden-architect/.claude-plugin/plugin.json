@@ -15,8 +15,5 @@
     "requirements",
     "work-breakdown"
   ],
-  "agents": "./agents/AGENT.md",
-  "commands": [
-    "./commands/plan-implement-review/plan-implement-review.md"
-  ]
+  "agents": "./agents/AGENT.md"
 }

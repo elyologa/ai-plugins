@@ -161,9 +161,9 @@ When reviewing implementation against a plan: verify adherence to the architectu
 
 ## Output Location
 
-Write artifacts to `.claude/outputs/plans/` relative to the current working directory:
-- `.claude/outputs/plans/{slug}-IMPLEMENTATION-PLAN.md`
-- `.claude/outputs/plans/{slug}-WORK-BREAKDOWN.md`
+Write artifacts to `${CLAUDE_PLUGIN_DATA}/plans/`:
+- `${CLAUDE_PLUGIN_DATA}/plans/{slug}-IMPLEMENTATION-PLAN.md`
+- `${CLAUDE_PLUGIN_DATA}/plans/{slug}-WORK-BREAKDOWN.md`
 
 Create the output directory if it doesn't exist.
 

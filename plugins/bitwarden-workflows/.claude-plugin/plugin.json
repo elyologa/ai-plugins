@@ -1,0 +1,12 @@
+{
+  "name": "bitwarden-workflows",
+  "version": "0.1.0",
+  "description": "Multi-agent orchestration workflows for Bitwarden development. Composes marketplace agents into end-to-end pipelines via Teams and task dependencies.",
+  "author": {
+    "name": "Bitwarden",
+    "url": "https://github.com/bitwarden"
+  },
+  "homepage": "https://github.com/bitwarden/ai-marketplace/tree/main/plugins/bitwarden-workflows",
+  "repository": "https://github.com/bitwarden/ai-marketplace",
+  "keywords": ["workflow", "orchestration", "pipeline", "plan-implement-review", "teams"]
+}

@@ -1,6 +1,6 @@
 ---
-description: End-to-end pipeline orchestrating requirements analysis, architecture planning, implementation, and multi-agent code review via agent team
-argument-hint: <task description, Jira ticket, or Confluence URL> [--confirm]
+name: plan-implement-review
+description: End-to-end pipeline orchestrating requirements analysis, architecture planning, implementation, and multi-agent code review via agent team. Use when starting a feature from a Jira ticket, planning multi-repo work, or running a full plan-implement-review cycle. Triggered by "plan and implement", "plan-implement-review", "end-to-end pipeline", "PIR".
 ---
 
 # Plan-Implement-Review Pipeline
@@ -14,12 +14,12 @@ You are the **team lead** for an end-to-end development pipeline. Use **Claude A
 Parse `$ARGUMENTS`: strip `--confirm` flag (enables **gated mode** — present output and get user approval between phases; default is **autonomous mode**). Derive a slug from the task description (lowercase, hyphens, max 40 chars).
 
 **Output paths** (using slug):
-- `.claude/outputs/plans/{slug}-REQUIREMENTS.md`
-- `.claude/outputs/plans/{slug}-IMPL-{REPO}.md` (one per in-scope repo)
-- `.claude/outputs/plans/{slug}-WORK-BREAKDOWN.md`
-- `.claude/outputs/plans/{slug}-QA-HANDOFF.md`
-- `.claude/outputs/reviews/{slug}-REVIEW-{REVIEWER}.md` (one per reviewer per phase)
-- `.claude/outputs/reviews/{slug}-REVIEW-SUMMARY.md`
+- `${CLAUDE_PLUGIN_DATA}/plans/{slug}-REQUIREMENTS.md`
+- `${CLAUDE_PLUGIN_DATA}/plans/{slug}-IMPL-{REPO}.md` (one per in-scope repo)
+- `${CLAUDE_PLUGIN_DATA}/plans/{slug}-WORK-BREAKDOWN.md`
+- `${CLAUDE_PLUGIN_DATA}/plans/{slug}-QA-HANDOFF.md`
+- `${CLAUDE_PLUGIN_DATA}/reviews/{slug}-REVIEW-{REVIEWER}.md` (one per reviewer per phase)
+- `${CLAUDE_PLUGIN_DATA}/reviews/{slug}-REVIEW-SUMMARY.md`
 
 ## Pipeline Structure
 
@@ -52,7 +52,7 @@ If a plugin is not installed, offer to **skip that teammate** rather than blocki
 
 ## Step 1: Create Team
 
-Team name: `pir-{slug}`. Create `.claude/outputs/plans/` and `.claude/outputs/reviews/` directories.
+Team name: `pir-{slug}`. Create `${CLAUDE_PLUGIN_DATA}/plans/` and `${CLAUDE_PLUGIN_DATA}/reviews/` directories.
 
 ## Step 2: Plan Phase
 
