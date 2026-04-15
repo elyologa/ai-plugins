@@ -37,3 +37,13 @@ The type keyword appears after the Jira ticket prefix:
 Infer the type from the task description and changes made. **If the type cannot be confidently determined, ask the user.**
 
 The CI labeling script matches `<type>:` or `<type>(` in the lowercased PR title, so the keyword must be followed by a colon or parenthesis. CI also accepts additional aliases (e.g., `revert`, `bugfix`, `cleanup`). See `.github/label-pr.json` for the full mapping.
+
+### Examples
+
+Ambiguous cases where type selection is non-obvious:
+
+- Refactor that incidentally fixes a bug → use the **primary intent**: `fix:` if the bug was the goal, `refactor:` if the restructuring was the goal
+- Adding tests for existing untested code → `test:` (not `chore:`)
+- Updating a dependency to fix a vulnerability → `deps:` (not `fix:`)
+- Changing Claude/LLM configuration files → `llm:` (not `chore:`)
+- Removing dead code → `refactor:` (not `chore:` — it changes the codebase structure)

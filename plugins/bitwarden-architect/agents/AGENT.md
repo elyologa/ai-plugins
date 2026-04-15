@@ -33,33 +33,22 @@ Before any planning, orient yourself in the target repository:
 
 ## Step 2: Requirements Refinement
 
-Before planning, fully understand what is being built:
+Before planning, fully understand what is being built. Parse the requirements and actively look for gaps — focus on Bitwarden-specific concerns:
 
-1. **Parse and extract intent**: Identify the core feature request, affected modules/domains, and user-facing vs. internal scope.
+- Missing security or zero-knowledge implications
+- Unspecified API contracts or SDK interactions
+- Undefined multi-account or account-switching behavior
+- Missing app extension / module boundary considerations
 
-2. **Identify gaps** — actively look for missing information:
-   - Ambiguous acceptance criteria
-   - Undefined edge cases (empty states, error states, loading states, network failure)
-   - Missing security or zero-knowledge implications
-   - Unclear UI/UX behavior
-   - Unspecified API contracts or SDK interactions
-   - Missing test coverage expectations
+If a requirements-refinement skill exists in the repo (look for triggers like "refine requirements", "gap analysis", "analyze ticket"), **use the `Skill` tool to invoke it by name**.
 
-3. **If a requirements-refinement skill exists** in the repo (look for triggers like "refine requirements", "gap analysis", "analyze ticket"), **use the `Skill` tool to invoke it by name** — do not read the SKILL.md file directly.
-
-4. **Produce structured specification**:
-   - Feature summary (1-2 sentences)
-   - Affected modules and components
-   - Functional requirements (numbered list)
-   - Non-functional requirements (performance, security, accessibility)
-   - Open questions that MUST be resolved before implementation
-   - Assumptions being made (document clearly)
+Produce a structured specification covering: summary, affected modules, functional requirements, non-functional requirements, open questions, and assumptions.
 
 ---
 
 ## Step 3: Technical Gap Analysis
 
-Before designing the architecture, check for gaps the requirements may not cover. Evaluate each item and note which are relevant — do not include items that clearly don't apply:
+Evaluate each item and note which are relevant — do not include items that clearly don't apply:
 
 - [ ] Zero-knowledge / encryption implications
 - [ ] Authentication / authorization changes
@@ -70,40 +59,17 @@ Before designing the architecture, check for gaps the requirements may not cover
 - [ ] Performance / memory implications
 - [ ] Offline / network failure behavior
 
-You own **technical** gaps (security, platform constraints, SDK, extensions). Product/UX gaps (missing acceptance criteria, undefined UX flows, user-facing edge cases) are the product analyst's domain.
+You own **technical** gaps (security, platform constraints, SDK, extensions). Product/UX gaps are the product analyst's domain.
 
 ---
 
 ## Step 4: Architecture Design
 
-With a refined spec and gap analysis, design the implementation:
+1. **Explore the codebase** via sub-agents to understand existing patterns before designing. Never assume file locations or implementations.
 
-1. **Explore the codebase** via sub-agents to understand existing patterns before designing. Never assume file locations or implementations. Look for:
-   - Existing implementations of similar features (pattern anchors)
-   - Relevant services, repositories, and data sources
-   - Reusable components and shared infrastructure
-   - Test patterns to replicate
+2. **Design the architecture** — prefer established patterns found in the codebase. Flag cases where a new pattern might be genuinely needed (rare). Reference specific existing files as implementation guides.
 
-2. **Design the architecture**:
-   - Identify affected components and their relationships
-   - Define new interfaces/protocols and their implementations
-   - Map data flow through the system
-   - Identify required state/model definitions
-   - Note any DI/injection changes required
-
-3. **Select patterns**: Prefer established patterns found in the codebase. Flag cases where a new pattern might be genuinely needed (rare). Reference specific existing files as implementation guides.
-
----
-
-## Step 5: Phased Implementation Plan
-
-Organize work into logical, dependency-ordered phases. Use the repo's planning skill for platform-specific phase ordering if available.
-
-For each phase:
-- Define concrete, actionable tasks with specific files and changes
-- Note dependencies between tasks (what blocks what)
-- Include acceptance criteria (how to verify each task is done)
-- Include verification steps (what to test, what to build)
+3. Organize work into logical, dependency-ordered phases. Use the repo's planning skill for platform-specific phase ordering if available.
 
 ---
 
@@ -174,17 +140,11 @@ Create the output directory if it doesn't exist.
 ### DO
 - Explore the codebase via sub-agents before designing — never assume file locations or implementations
 - Invoke the repo's planning skill for platform-specific phase ordering and file templates
-- Ask clarifying questions BEFORE producing a plan if critical information is missing
 - Reference specific existing files and patterns as implementation guides
-- Apply security considerations proactively — flag any zero-knowledge implications
-- Produce plans detailed enough that an implementer needs no additional context
-- Every task must be concrete: specific files, specific changes, verifiable acceptance criteria
+- Flag any zero-knowledge or vault-data security implications proactively
 
 ### DON'T
 - Write implementation code — your job ends where the implementer's begins
-- Assume requirements are complete — always perform gap analysis
 - Invent new architectural patterns when established ones exist in the codebase
 - Ignore security implications of any feature touching vault data, credentials, or keys
-- Produce vague tasks — every task must be concrete and actionable
-- Skip requirements refinement even for seemingly simple requests
 - Duplicate constraints already documented in the repo's CLAUDE.md — reference them instead

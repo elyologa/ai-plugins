@@ -16,12 +16,26 @@ description: Git commit conventions and workflow for Bitwarden repositories. Use
 ### Rules
 
 1. **Ticket prefix**: Always include `[PM-XXXXX]` matching the Jira ticket
-2. **Type keyword**: Include a conventional commit type after the ticket prefix — **use the `labeling-changes` skill** (invoke via the Skill tool) for the full type keyword table and selection guidance
-3. **Imperative mood**: "Add feature" not "Added feature" or "Adds feature"
-4. **Short summary**: Under 72 characters for the first line
-5. **Body**: Explain the "why" not the "what" — the diff shows the what
+2. **Type keyword**: Select from the table below. The keyword drives automatic `t:` label assignment via CI (`.github/scripts/label-pr.py` reads `.github/label-pr.json`). CI matches `<type>:` or `<type>(` in the lowercased title.
 
-### Example
+| Type | Label | Use for |
+|------|-------|---------|
+| `feat` | `t:feature` | New features or functionality |
+| `fix` | `t:bug` | Bug fixes |
+| `refactor` | `t:tech-debt` | Code restructuring without behavior change |
+| `chore` | `t:tech-debt` | Maintenance, cleanup, minor tweaks |
+| `test` | `t:tech-debt` | Adding or updating tests |
+| `perf` | `t:tech-debt` | Performance improvements |
+| `docs` | `t:docs` | Documentation changes |
+| `ci` / `build` | `t:ci` | CI/CD and build system changes |
+| `deps` | `t:deps` | Dependency updates |
+| `llm` | `t:llm` | LLM/Claude configuration changes |
+| `breaking` | `t:breaking-change` | Breaking changes requiring migration |
+| `misc` | `t:misc` | Changes that do not fit other categories |
+
+CI also accepts aliases (e.g., `revert`, `bugfix`, `cleanup`). See `.github/label-pr.json` for the full mapping. **If the type cannot be confidently determined, ask the user.**
+
+### Examples
 
 ```
 [PM-12345] feat: Add biometric unlock timeout configuration
@@ -30,9 +44,18 @@ Users reported confusion about when biometric prompts appear.
 This adds a configurable timeout setting to the security preferences.
 ```
 
+Ambiguous cases — choosing between similar types:
+```
+# Refactor that also fixes a bug? Use the primary intent:
+[PM-12345] fix: Resolve null pointer in vault sync retry logic
+
+# Test-only change:
+[PM-12345] test: Add unit tests for biometric timeout edge cases
+```
+
 ### Followup Commits
 
-Only the first commit on a branch needs the full format (ticket prefix, type keyword, body). Subsequent commits — whether addressing review feedback, making intermediate changes, or iterating locally — can use a short, descriptive summary with no prefix or body required.
+Only the first commit on a branch needs the full format (ticket prefix, type keyword, body). Subsequent commits can use a short, descriptive summary with no prefix or body required.
 
 ```
 Update error handling in login flow
@@ -40,36 +63,6 @@ Update error handling in login flow
 
 ---
 
-## Pre-Commit Checklist
+## Pre-Commit Quality Gate
 
-Consult the repo's CLAUDE.md for platform-specific build and lint commands. At minimum, before staging and committing:
-
-1. **Run affected tests** — use the repo's build/test skill if available
-2. **Check lint** — run the repo's linter on changed files
-3. **Review staged changes**: `git diff --staged` — verify no unintended modifications
-4. **Verify no secrets**: No API keys, tokens, passwords, or `.env` files staged
-5. **Verify no generated files**: No build outputs, IDE-specific changes, or generated code
-
----
-
-## What NOT to Commit
-
-- `.env` files or config files with real tokens/credentials
-- Signing keys or keystores
-- Build outputs (platform-specific — check `.gitignore`)
-- IDE-specific files (`.idea/` changes, `*.iml`, `.xcuserdata/`, etc.)
-- Large binary files
-
----
-
-## Staging Best Practices
-
-- **Stage specific files** by name rather than `git add -A` or `git add .`
-- Put each file path on its own line for readability:
-  ```bash
-  git add \
-    path/to/first/File \
-    path/to/second/File
-  ```
-- Review each file being staged to avoid accidentally including sensitive data
-- Use `git status` (without `-uall` flag) to see the working tree state
+Before staging, run the `perform-preflight` skill for the full quality gate checklist (tests, lint, security, architecture). Consult the repo's CLAUDE.md for platform-specific build and lint commands.

@@ -11,25 +11,33 @@ description: Pull request creation workflow for Bitwarden repositories. Use when
 [PM-XXXXX] <type>: <short imperative summary>
 ```
 
+**Type keywords** (triggers automatic `t:` label via CI):
+
+| Type | Label | Use for |
+|------|-------|---------|
+| `feat` | `t:feature` | New features or functionality |
+| `fix` | `t:bug` | Bug fixes |
+| `refactor` | `t:tech-debt` | Code restructuring without behavior change |
+| `chore` | `t:tech-debt` | Maintenance, cleanup, minor tweaks |
+| `test` | `t:tech-debt` | Adding or updating tests |
+| `perf` | `t:tech-debt` | Performance improvements |
+| `docs` | `t:docs` | Documentation changes |
+| `ci` / `build` | `t:ci` | CI/CD and build system changes |
+| `deps` | `t:deps` | Dependency updates |
+| `llm` | `t:llm` | LLM/Claude configuration changes |
+| `breaking` | `t:breaking-change` | Breaking changes requiring migration |
+| `misc` | `t:misc` | Changes that do not fit other categories |
+
 **Examples:**
 - `[PM-12345] feat: Add autofill support for passkeys`
 - `[PM-12345] fix: Resolve crash during vault sync`
 - `[PM-12345] refactor: Simplify authentication flow`
 
-**Rules:**
-- Include Jira ticket prefix
-- Keep under 70 characters total
-- Use imperative mood in the summary
-
-**Type keywords** (triggers automatic `t:` label via CI):
-
-**Use the `labeling-changes` skill** (invoke via the Skill tool) for the full type keyword table and selection guidance.
-
 ---
 
-## PR Body Template
+## PR Body
 
-**IMPORTANT:** Always follow the repo's PR template at `.github/PULL_REQUEST_TEMPLATE.md`. If no template exists, use this structure:
+**Always follow the repo's PR template at `.github/PULL_REQUEST_TEMPLATE.md`.** Read it and fill in each section. If no template exists, use this fallback:
 
 ```markdown
 ## Type of change
@@ -51,27 +59,16 @@ Delete the Screenshots section entirely if there are no UI changes.
 
 ---
 
-## Pre-PR Checklist
-
-1. **All tests pass** — consult CLAUDE.md or the repo's build/test skill for the correct test commands
-2. **Lint clean** — consult CLAUDE.md for the repo's lint command
-3. **Self-review done** — use the `perform-preflight` skill
-4. **No unintended changes**: Check `git diff origin/main...HEAD` for unexpected files
-5. **Branch up to date**: Rebase on `main` if needed
-
----
-
 ## Creating the PR
 
-```bash
-# Ensure branch is pushed
-git push -u origin <branch-name>
+Before creating, run `perform-preflight` if not already done.
 
-# Create PR as draft by default (body follows .github/PULL_REQUEST_TEMPLATE.md)
+```bash
+git push -u origin <branch-name>
 gh pr create --draft --title "[PM-XXXXX] feat: Short summary" --body "<fill in from PR template>"
 ```
 
-**Default to draft PRs.** Only create a non-draft (ready for review) PR if the user explicitly requests it.
+**Default to draft PRs.** Only create a non-draft PR if the user explicitly requests it.
 
 ---
 
@@ -87,10 +84,3 @@ If the user selects a label, include it via the `--label` flag:
 ```bash
 gh pr create --draft --label "ai-review-vnext" --title "..." --body "..."
 ```
-
----
-
-## Base Branch
-
-- Default target: `main`
-- Check with team if targeting a feature branch instead
