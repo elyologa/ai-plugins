@@ -67,19 +67,19 @@
     {
       "name": "bitwarden-architect",
       "source": "./plugins/bitwarden-architect",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "description": "Software architect agent for planning features across any Bitwarden repository. Discovers platform context dynamically via CLAUDE.md and repo-local planning skills."
     },
     {
       "name": "bitwarden-delivery-tools",
       "source": "./plugins/bitwarden-delivery-tools",
-      "version": "0.1.0",
+      "version": "1.0.0",
       "description": "Generic delivery workflow skills for committing, PR creation, preflight checks, and change labeling across any Bitwarden repository."
     },
     {
       "name": "bitwarden-workflows",
       "source": "./plugins/bitwarden-workflows",
-      "version": "0.1.0",
+      "version": "1.0.0",
       "description": "Multi-agent orchestration workflows for Bitwarden development. Composes marketplace agents into end-to-end pipelines via Teams and task dependencies."
     }
   ]

@@ -1,13 +1,15 @@
 ---
 name: architecting-solutions
-description: Principal engineer perspective on architecture, system design, architecture reviews, blast radius assessment, trade-off analysis, and decision-making. Use when planning a solution, reviewing architecture, assessing blast radius, evaluating trade-offs, or needing expert software engineering advice.
+description: Principal engineer perspective on architecture, system design, blast radius assessment, trade-off analysis, and design decisions. Produces architectural thinking, not artifacts — pair with `bitwarden-architect:creating-implementation-plan` when a plan document is required.
+when_to_use: Reasoning about architecture for a Jira ticket, spec, or feature description, Reviewing an architecture proposal, Assessing blast radius before a change, Evaluating trade-offs between competing approaches, Needing expert software engineering judgment on a non-trivial design decision
+argument-hints: Jira ticket key (e.g., PM-XXXX), Confluence page URL or document, Plain-text feature description, Existing architecture proposal to review
 ---
 
 ## Security Mindset
 
 Bitwarden is a password manager — security isn't a feature, it's the product. Every design decision is a security decision.
 
-- **Threat model early.** Before approving an approach, ask: what can an attacker reach from here? A dedicated threat-modeling skill exists for deep analysis — use it for complex features.
+- **Threat model early.** Before approving an approach, ask: what can an attacker reach from here? Invoke `bitwarden-security-engineer:threat-modeling` for new trust boundaries, new PII/secret classes, or anything touching crypto.
 - **Classify data touch points.** Know which fields are encrypted, which are plaintext, and which cross trust boundaries. Never add a new path for sensitive data without encryption at rest and in transit.
 - **Audit trail by default.** Sensitive operations must be observable after the fact. If it can't be audited, it shouldn't ship.
 - **Fail closed.** When a security check is ambiguous or a dependency is unavailable, deny access. Never default to permissive.
@@ -45,3 +47,12 @@ Bitwarden is a password manager — security isn't a feature, it's the product. 
 - Missing test coverage for new code paths
 - Security shortcuts in the name of velocity
 - Refactors bundled with feature work without explicit scope approval
+
+## Composition
+
+This skill answers *what to worry about*. Reach for adjacent skills via the `Skill` tool when the work crosses their domain:
+
+- `bitwarden-architect:creating-implementation-plan` — when the output needs to be a structured plan document ready for implementer handoff.
+- `bitwarden-security-engineer:threat-modeling` — new trust boundaries, new PII/secret classes, crypto changes.
+- `bitwarden-security-engineer:reviewing-security-architecture` — authentication, authorization, encryption design review.
+- `bitwarden-software-engineer:writing-server-code`, `bitwarden-software-engineer:writing-client-code`, `bitwarden-software-engineer:writing-database-queries`, `bitwarden-software-engineer:implementing-dapper-queries`, `bitwarden-software-engineer:implementing-ef-core` — language and repo conventions for the target stack.

@@ -1,6 +1,6 @@
 {
   "name": "bitwarden-workflows",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Multi-agent orchestration workflows for Bitwarden development. Composes marketplace agents into end-to-end pipelines via Teams and task dependencies.",
   "author": {
     "name": "Bitwarden",
