@@ -5,16 +5,23 @@ All notable changes to the `bitwarden-software-engineer` plugin will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.4.0] - 2026-04-08
+## [0.3.3] - 2026-04-15
 
 ### Changed
 
-- Agent now autonomously drives full implementation lifecycle with self-review protocol (implement, test, build, preflight, commit)
-- Added dynamic context discovery via CLAUDE.md Skills & Commands table — agent discovers and invokes repo-local skills at runtime
-- Added `Agent` and `Skill` (bare) to tools for dynamic discovery and sub-agent deployment
-- Removed preloaded skill frontmatter — all skills are now discovered dynamically from CLAUDE.md and installed plugins
-- Added decision-making framework and critical rules from per-repo implementer agents
-- Replaces per-repo implementer agents (`android-implementer`, `ios-implementer`)
+- Updated `writing-database-queries` skill: clarified dual-ORM architecture, rewrote EDD section to reflect no-rollback deployment model, documented stored procedure compatibility patterns, simplified key locations, and removed Cloud/Self-hosted labels from ORM descriptions
+
+## [0.3.2] - 2026-04-15
+
+### Changed
+
+- Apply prettier formatting to markdown and JSON files
+
+## [0.3.1] - 2026-04-13
+
+### Changed
+
+- `implementing-dapper-queries` skill now distinguishes SSDT source files (`src/Sql/dbo/`) from migration scripts (`util/Migrator/DbScripts/`), clarifying when to use `CREATE PROCEDURE` vs `CREATE OR ALTER PROCEDURE`
 
 ## [0.3.0] - 2026-02-23
 

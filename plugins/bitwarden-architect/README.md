@@ -1,16 +1,53 @@
-# Bitwarden Architect
-
-Generic software architect agent for planning features across any Bitwarden repository.
+# Bitwarden Software Architect Plugin
 
 ## Overview
 
-The architect agent transforms requirements, tickets, or feature ideas into precise, actionable, phased implementation plans before any code is written. It works across all Bitwarden repositories (Android, iOS, Server, SDK, Clients) by dynamically discovering platform-specific context from each repo's CLAUDE.md and local planning skills.
+Software architecture planning for Bitwarden repositories. Generic AI assistance doesn't know our zero-knowledge constraints, multi-client reality, dual-ORM strategy, or V+/-2 version matrix. This plugin keeps architecture decisions grounded in how we actually build software at Bitwarden.
 
 ## Agent
 
-| Agent | Model | Description |
-|-------|-------|-------------|
-| `architect` | opus | Plans and designs implementations for any Bitwarden repo |
+| Agent                 | What It Does                                                                   |
+| --------------------- | ------------------------------------------------------------------------------ |
+| `bitwarden-architect` | Produces implementation plans grounded in Bitwarden's architectural principles |
+
+## Skills
+
+| Skill                    | What It Does                                                                                                                         |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `architecting-solutions` | Principal engineer perspective on architecture decisions. Provides the architectural judgment framework applied across all planning. |
+
+## Cross-Plugin Integration
+
+| Plugin                        | How It's Used                                                            |
+| ----------------------------- | ------------------------------------------------------------------------ |
+| `bitwarden-security-engineer` | Security context (P01-P06), architecture pattern review, threat modeling |
+| `bitwarden-product-analyst`   | Consumes requirements documents as upstream input                        |
+| `bitwarden-software-engineer` | Implementation conventions for server, client, and database decisions    |
+| `bitwarden-atlassian-tools`   | Jira issue research and Confluence page access                           |
+
+All cross-plugin skills are required because we rely upon each of them for a rich, complete workflow.
+
+## Installation
+
+```bash
+/plugin install bitwarden-architect@bitwarden-marketplace
+```
+
+## Usage
+
+The architect agent activates when you need to plan a feature, review an architecture decision, assess blast radius, or produce an implementation plan:
+
+```
+Plan the implementation for PM-12345
+```
+
+```
+Review the architecture of [feature area] and suggest improvements
+```
+
+```
+Assess the blast radius of adding [capability] to [service]
+```
 
 ## How It Works
 
@@ -26,12 +63,8 @@ The architect agent transforms requirements, tickets, or feature ideas into prec
 - **Work Breakdown Document** (`{slug}-WORK-BREAKDOWN.md`) — Jira-ready tasks consolidating product and technical breakdowns
 - **Architecture Review** — Verification of implementation adherence to the plan
 
-## Requirements
+## References
 
-| Plugin | Required For |
-|--------|-------------|
-| `bitwarden-atlassian-tools` | Optional — Jira/Confluence fetching |
-
-## Installation
-
-Install via the Bitwarden AI Marketplace.
+- [Bitwarden Security Definitions](https://contributing.bitwarden.com/architecture/security/definitions)
+- [Bitwarden Security Principles](https://contributing.bitwarden.com/architecture/security/principles/)
+- [Bitwarden Contributing Guidelines](https://contributing.bitwarden.com/contributing/)
