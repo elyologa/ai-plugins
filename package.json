@@ -1,26 +1,62 @@
 {
-  "name": "@bitwarden/ai-plugins",
-  "version": "0.0.0",
-  "description": "Bitwarden AI Plugins",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bitwarden/ai-plugins.git"
-  },
-  "author": "Bitwarden Inc. <hello@bitwarden.com> (https://bitwarden.com)",
-  "license": "SEE LICENSE IN LICENSE.txt",
-  "bugs": {
-    "url": "https://github.com/bitwarden/ai-plugins/issues"
-  },
-  "homepage": "https://bitwarden.com",
-  "devDependencies": {
-    "husky": "9.1.7",
-    "lint-staged": "16.2.3",
-    "prettier": "3.6.2"
-  },
-  "lint-staged": {
-    "*": "prettier --cache --write --ignore-unknown"
-  },
+  "name": "ai-plugins",
+  "version": "1.0.0",
+  "description": "AI plugins for Bitwarden — Claude plugin marketplace integration",
+  "private": true,
   "scripts": {
-    "prepare": "husky"
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write \"**/*.{ts,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,json,md}\"",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "spell:check": "cspell \"**/*.{ts,md,json}\""
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "dependencies": {
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "cspell": "^8.3.2",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "jest": "^29.7.0",
+    "prettier": "^3.2.4",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.3.3"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/__tests__/**/*.ts",
+      "**/*.spec.ts",
+      "**/*.test.ts"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!src/**/*.d.ts"
+    ]
+  },
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "arrowParens": "always"
   }
 }
