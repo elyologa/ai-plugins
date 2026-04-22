@@ -48,6 +48,11 @@
       "src/**/*.ts",
       "!src/**/*.d.ts"
     ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 80
+      }
+    },
     "verbose": true
   },
   "prettier": {
@@ -55,7 +60,7 @@
     "tabWidth": 2,
     "useTabs": false,
     "semi": true,
-    "singleQuote": false,
+    "singleQuote": true,
     "trailingComma": "all",
     "bracketSpacing": true,
     "arrowParens": "always"
