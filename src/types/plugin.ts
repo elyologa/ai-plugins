@@ -41,6 +41,8 @@ export interface PluginConfig {
   apiKey?: string;
   /** Base URL override for self-hosted or proxy endpoints */
   baseUrl?: string;
+  /** Request timeout in milliseconds (defaults to 30000) */
+  timeoutMs?: number;
   /** Additional provider-specific configuration */
   options?: Record<string, unknown>;
 }
